@@ -2,76 +2,54 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: lightblue; /* Changed background to light blue */
-    font-family: Arial, sans-serif; /* Use a standard font. Replace 'Arial' with your desired font */
-    display: flex; /* Added for Flexbox centering */
-    flex-direction: column; /* Align items vertically */
-    align-items: center; /* Center items horizontally */
-    /* Uncomment below if you want to center content vertically */
-    /* min-height: 100vh;
-    justify-content: center; */
+    background-color: lightblue;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* Styling for the main heading */
 h1 {
-    color: darkblue; /* Set the text color to dark blue */
-    font-size: 69px; /* Make the text appropriately large */
-    font-weight: bold; /* Make the text bold */
-    text-align: center; /* Center the text */
-    margin: 0; /* Remove any margin around the title */
-    padding: 10px 20px; /* Padding around the text */
-    text-shadow: 3px 3px 5px blue; /* Create a shadow effect */
-    background-color: #4169e1; /* Set background to royal blue */
-    display: inline-block; /* Allows control over padding and background */
-    border-radius: 8px; /* Optional: Adds rounded corners */
+    color: darkblue;
+    font-size: 69px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+    padding: 10px 20px;
+    text-shadow: 3px 3px 5px blue;
+    background-color: #4169e1;
+    display: inline-block;
+    border-radius: 8px;
 }
 
-/* Container for the canvas */
 .canvas-container {
     margin-top: 25px;
-    /* Removed display: inline-block; */
 }
 
-/* Styling for the canvas element */
 canvas {
     border: 1px solid #000;
     cursor: crosshair;
     background-color: #fff;
-    /* Removed display: block; and margin: 0 auto; */
-    border-radius: 4px; /* Optional: Adds rounded corners */
+    border-radius: 4px;
 }
 
-/* Styling for the tools section */
 .tools {
     margin-top: 10px;
-    color: #000; /* Changed text color to black */
+    color: #000;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 10px; /* Adds space between items */
+    gap: 10px;
 }
 
-/* Styling for labels, inputs, and buttons within tools */
 .tools label,
 .tools input,
 .tools button {
     margin: 5px;
-    font-size: 16px; /* Ensures consistent font size */
+    font-size: 16px;
 }
 
-/* Specific styling for labels */
-.tools label {
-    color: #000; /* Changed text color to black */
-}
-
-/* Styling for range and color inputs */
-.tools input[type="range"],
-.tools input[type="color"] {
-    vertical-align: middle;
-}
-
-/* Optional: Styling for buttons */
 .tools button {
     padding: 8px 16px;
     background-color: #4169e1;
@@ -83,5 +61,5 @@ canvas {
 }
 
 .tools button:hover {
-    background-color: #3151a9; /* Darker shade on hover */
+    background-color: #3151a9;
 }
