@@ -6,58 +6,31 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="title-container">
-        <div class="title-text">Interactive Whiteboard</div>
-        <div class="date-text" id="date"></div>
+    <h1>Interactive Whiteboard</h1>
+    <div class="canvas-container">
+        <canvas id="whiteboard" width="600" height="400"></canvas>
     </div>
+    <div class="tools">
+        <label for="colorPicker">Brush Color:</label>
+        <input type="color" id="colorPicker" value="#000000">
 
-    <div class="main-container">
-        <div class="pen-options">
-            <button>Pen Option 1</button>
-            <button>Pen Option 2</button>
-        </div>
-        
-        <div class="writer-container">
-            <canvas id="whiteboard" width="600" height="400"></canvas>
-        </div>
+        <label for="brushSize">Brush Size:</label>
+        <input type="range" id="brushSize" min="1" max="10" value="2">
 
-        <div class="page-options">
-            <button>Page Option 1</button>
-            <button>Page Option 2</button>
-        </div>
+        <button id="clearButton">Clear</button>
+        <button id="replayButton">Re-write</button>
+
+        <label for="replaySpeed">Replay Speed:</label>
+        <input type="range" id="replaySpeed" min="1" max="10" value="5">
+
+        <!-- File input to upload background image -->
+        <label for="backgroundUpload">Upload Background Image:</label>
+        <input type="file" id="backgroundUpload" accept="image/*">
+
+        <!-- File input to upload pen image -->
+        <label for="penUpload">Upload Pen Image:</label>
+        <input type="file" id="penUpload" accept="image/*">
     </div>
-
-    <div class="controls-container">
-        <div class="reset-do-container">
-            <button id="resetButton">Reset</button>
-            <div class="undo-redo-container">
-                <button>Undo</button>
-                <button>Redo</button>
-            </div>
-        </div>
-        
-        <div class="write-speed-container">
-            <div id="writeSpeedText">Write Speed</div>
-            <input type="range" min="1" max="10" value="5" class="slider">
-        </div>
-
-        <div class="colour-picker-container">
-            <label for="colorPicker">Brush Color:</label>
-            <input type="color" id="colorPicker" value="#000000">
-        </div>
-        
-        <div class="rewrite-container">
-            <button id="rewriteButton">Rewrite</button>
-        </div>
-    </div>
-
     <script src="script.js"></script>
-    <script>
-        // Adding Date dynamically to the date-text div
-        const dateElement = document.getElementById('date');
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        const today = new Date();
-        dateElement.textContent = today.toLocaleDateString('en-US', options);
-    </script>
 </body>
 </html>
