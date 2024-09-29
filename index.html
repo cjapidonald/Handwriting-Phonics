@@ -6,7 +6,12 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Interactive Whiteboard</h1>
+    <!-- New Title Container -->
+    <div class="title-container">
+        <div class="title-text">Interactive Whiteboard</div>
+        <div class="date-text" id="date"></div>
+    </div>
+
     <div class="canvas-container">
         <canvas id="whiteboard" width="600" height="400"></canvas>
     </div>
@@ -32,5 +37,12 @@
         <input type="file" id="penUpload" accept="image/*">
     </div>
     <script src="script.js"></script>
+    <script>
+        // Adding Date dynamically to the date-text div
+        const dateElement = document.getElementById('date');
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const today = new Date();
+        dateElement.textContent = today.toLocaleDateString('en-US', options);
+    </script>
 </body>
 </html>
