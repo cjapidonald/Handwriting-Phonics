@@ -1,0 +1,45 @@
+body {
+    text-align: center;
+    background-color: darkblue;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+}
+
+.canvas-container {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+canvas {
+    border: 1px solid #000;
+    cursor: crosshair;
+    display: block;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+.tools {
+    margin-top: 10px;
+    color: #fff;
+}
+
+.tools label,
+.tools input,
+.tools button {
+    margin: 5px;
+}
+
+.tools label {
+    color: #fff;
+}
+
+.tools input[type="range"],
+.tools input[type="color"] {
+    vertical-align: middle;
+}

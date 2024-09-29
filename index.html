@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive Whiteboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Interactive Whiteboard</h1>
+    <div class="canvas-container">
+        <canvas id="whiteboard" width="600" height="400"></canvas>
+    </div>
+    <div class="tools">
+        <label for="colorPicker">Brush Color:</label>
+        <input type="color" id="colorPicker" value="#000000">
+
+        <label for="brushSize">Brush Size:</label>
+        <input type="range" id="brushSize" min="1" max="10" value="2">
+
+        <button id="clearButton">Clear</button>
+        <button id="replayButton">Re-write</button>
+
+        <label for="replaySpeed">Replay Speed:</label>
+        <input type="range" id="replaySpeed" min="1" max="10" value="5">
+
+        <!-- File input to upload background image -->
+        <label for="backgroundUpload">Upload Background Image:</label>
+        <input type="file" id="backgroundUpload" accept="image/*">
+
+        <!-- File input to upload pen image -->
+        <label for="penUpload">Upload Pen Image:</label>
+        <input type="file" id="penUpload" accept="image/*">
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
