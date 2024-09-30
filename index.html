@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Interactive Whiteboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="styles.css"> <!-- Link to the external CSS file -->
 </head>
 <body>
@@ -19,15 +18,14 @@
         <input type="color" id="colorPicker" value="#000000">
 
         <label for="brushSize">Brush Size:</label>
-        <input type="range" id="brushSize" min="1" max="30" value="2">
+        <input type="range" id="brushSize" min="1" max="10" value="2">
 
         <button id="clearButton">Clear</button>
         <button id="replayButton">Re-write</button>
 
         <label for="replaySpeed">Replay Speed:</label>
-        <input type="range" id="replaySpeed" min="1" max="30" value="5">
+        <input type="range" id="replaySpeed" min="1" max="20" value="5">
 
-        <!-- File input to upload pen image -->
         <label for="penUpload">Upload Pen Image:</label>
         <input type="file" id="penUpload" accept="image/*">
     </div>
