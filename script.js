@@ -13,6 +13,7 @@ let currentSize = 2;
 let paths = [];
 let currentPath = [];
 let isReplaying = false;
+let stopReplay = false; // Variable to stop the replay loop
 let backgroundImage = new Image(); // Define the background image
 let penImage = null;
 
@@ -26,22 +27,41 @@ backgroundImage.onload = function() {
 ctx.fillStyle = '#FFFFFF';
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+// Event listeners for mouse input
 canvas.addEventListener('mousedown', startPosition);
 canvas.addEventListener('mouseup', finishedPosition);
 canvas.addEventListener('mousemove', draw);
 canvas.addEventListener('mouseleave', finishedPosition);
 
+// Event listeners for touch input
+canvas.addEventListener('touchstart', startTouchPosition);
+canvas.addEventListener('touchend', finishedPosition);
+canvas.addEventListener('touchmove', drawTouch);
+
+// Other event listeners
 colorPicker.addEventListener('change', (e) => currentColor = e.target.value);
 brushSize.addEventListener('change', (e) => currentSize = e.target.value);
 clearButton.addEventListener('click', clearCanvas);
-replayButton.addEventListener('click', replayDrawing);
+replayButton.addEventListener('click', replayDrawingLoop); // Start the replay loop
 penUpload.addEventListener('change', uploadPen);
 
+// Mouse event handling
 function startPosition(e) {
     if (isReplaying) return;
+    stopReplay = true; // Stop replay when the user starts drawing
     drawing = true;
     currentPath = [];
     draw(e);
+}
+
+// Touch event handling
+function startTouchPosition(e) {
+    if (isReplaying) return;
+    stopReplay = true; // Stop replay when the user starts drawing
+    drawing = true;
+    currentPath = [];
+    drawTouch(e);
+    e.preventDefault(); // Prevent scrolling when drawing
 }
 
 function finishedPosition() {
@@ -51,13 +71,28 @@ function finishedPosition() {
     ctx.beginPath();
 }
 
+// Mouse drawing
 function draw(e) {
     if (!drawing || isReplaying) return;
-
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
+    drawLine(x, y);
+}
 
+// Touch drawing
+function drawTouch(e) {
+    if (!drawing || isReplaying) return;
+    const rect = canvas.getBoundingClientRect();
+    const touch = e.touches[0]; // Single touch point
+    const x = touch.clientX - rect.left;
+    const y = touch.clientY - rect.top;
+    drawLine(x, y);
+    e.preventDefault(); // Prevent scrolling when drawing
+}
+
+// Helper function for drawing a line
+function drawLine(x, y) {
     ctx.lineWidth = currentSize;
     ctx.lineCap = 'round';
     ctx.strokeStyle = currentColor;
@@ -81,6 +116,7 @@ function clearCanvas() {
     // Redraw background image
     ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
     paths = [];
+    stopReplay = true; // Stop the replay loop when clearing the board
 }
 
 function replayDrawing() {
@@ -95,9 +131,7 @@ function replayDrawing() {
 
     function replayStep() {
         if (index >= paths.length) {
-            isReplaying = false;
-            ctx.beginPath();
-            return;
+            index = 0; // Reset to the beginning to loop
         }
 
         let path = paths[index];
@@ -106,6 +140,9 @@ function replayDrawing() {
         function drawPath() {
             if (pointIndex >= path.length) {
                 index++;
+                if (index >= paths.length) {
+                    index = 0; // Reset index to loop from the start
+                }
                 setTimeout(replayStep, 50);
                 return;
             }
@@ -118,8 +155,8 @@ function replayDrawing() {
             redrawPathsUpTo(index, pointIndex);
 
             if (penImage) {
-                const penWidth = 30;
-                const penHeight = 30;
+                const penWidth = 50;
+                const penHeight = 50;
                 ctx.drawImage(penImage, point.x - penWidth / 2, point.y - penHeight / 2, penWidth, penHeight);
             }
 
@@ -131,6 +168,20 @@ function replayDrawing() {
     }
 
     replayStep();
+}
+
+// Function to replay in a loop until a new drawing is started or the board is cleared
+function replayDrawingLoop() {
+    stopReplay = false; // Allow replay loop
+    function loop() {
+        if (stopReplay || paths.length === 0) {
+            isReplaying = false;
+            return; // Stop the loop if drawing starts or board is cleared
+        }
+        replayDrawing();
+        setTimeout(loop, 200); // Restart the loop after the replay finishes
+    }
+    loop(); // Start the loop
 }
 
 function redrawPathsUpTo(pathIndex, pointIndex) {
